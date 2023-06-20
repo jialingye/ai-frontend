@@ -1,23 +1,28 @@
-import logo from './logo.svg';
-import './App.css';
-
+import { Navigate, Route, Routes } from "react-router-dom";
+import "./App.css";
+import MainNav from "./components/MainNav";
+import Project from "./pages/Project";
+import NewProject from "./pages/NewProject";
+//container comp
 function App() {
+  let routes;
+
+  routes = (
+    <Routes>
+      <Route exact={true} path="/" element={<Project />} />
+      <Route path="/new" element={<NewProject />} />
+      {/* <Route path="/:id" element={<Person />} />
+      <Route path="/:id/edit" element={<UpdatePerson />} /> */}
+      <Route path="*" element={<Navigate to="/" replace />} />
+    </Routes>
+  );
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+      <header>
+        <MainNav />
       </header>
+      <main>{routes}</main>
     </div>
   );
 }
